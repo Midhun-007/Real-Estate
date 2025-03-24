@@ -8,6 +8,7 @@ import Header from './components/Header'
 import About from './components/About'
 import Projects from './components/Projects'
 import Contact from './components/Contact'
+import Signup from './components/signup'
 
 function App() {
 
@@ -19,6 +20,7 @@ const router=createBrowserRouter(
       <Route path="/Projects" element={<Projects></Projects>}></Route>
       <Route path="/Testimonials" element={<Contact></Contact>}></Route>
       <Route path='/profile' element={<Profile></Profile>}></Route>
+      <Route path='/Signup' element={<Signup></Signup>}/>
     </Route>
     
   )
