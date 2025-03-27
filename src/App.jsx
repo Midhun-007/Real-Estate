@@ -9,7 +9,7 @@ import About from './components/About'
 import Projects from './components/Projects'
 import Contact from './components/Contact'
 import Signup from './components/signup'
-import Login from "./components/Login"
+import Login from "./components/login"
 
 function App() {
 

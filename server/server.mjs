@@ -5,6 +5,7 @@ import passport from "passport"
 import mongoose from "mongoose"
 import cors from "cors"
 import SignupData from "./mongoose/schemas/user.mjs"
+import "./strategies/local-strategies.mjs";
 const app=express();
 
 mongoose.connect('mongodb://localhost:27017/server').then(()=>{console.log("connected to database")}).catch((err)=>{console.log(err)})
@@ -24,6 +25,14 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 const PORT=3000;
+
+const resolveRequest=(req,response,next)=>{
+    req.body.username = req.body.data.Username; 
+    req.body.password = req.body.data.Password; 
+    console.log("in resolve")
+    next()
+}
+app.use(resolveRequest);
 
 app.get("/",(request,response)=>{
     request.session.visited=true
@@ -46,7 +55,11 @@ app.post("/api/data",async (request,response)=>{
     }
     
 })
-app.post("api/login")
+app.post("/api/login",resolveRequest,passport.authenticate('local'),(request,response)=>{
+   
+    
+    return response.json({ message: "Data received successfully", receivedData: request.body })
+})
 app.listen(PORT,()=>{
     console.log("server has started "+PORT)
 })

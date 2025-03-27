@@ -12,7 +12,7 @@ passport.deserializeUser(async (id,done)=>{
     console.log("inside deserializer ")
     console.log(`deserializing user :${id}`)
     try{
-        const user =await SignupData.findByID(id)
+        const user =await SignupData.findById(id)
         if(!user) throw new Error("no user")
         done(null,user)
     }
@@ -21,18 +21,22 @@ passport.deserializeUser(async (id,done)=>{
     }
 })
 
-export default passport.use(new LocalStrategyStrategy
+export default passport.use(new  Strategy({ usernameField: "username", passwordField: "password" },
     (async (username,password,done)=>{
     try{
-        const user =await SignupData.findOne({username})
+        console.log("localstrategy")
+        const user =await SignupData.findOne({Username:username})
+        console.log(user)
         if(!user) return done(null,false,{msg:"User not found"})
 
-        if(!(password===user.password)){
+        if(!(password===user.Password)){
+            console.log({ message: "Incorrect password" })
             return done(null, false, { message: "Incorrect password" })
         }
+        console.log("success")
         return done(null, user);
     }
     catch(err){
         return done(err);
     }
-}))
+})))

@@ -5,16 +5,29 @@ function Login() {
   
   async function handleSubmit(event){
     event.preventDefault();
-    const formData=new FormData()
+    const formData=new FormData(event.target)
+    console.log(formData)
     const data={}
-    for(let pair of formData.entries){
+    for(let pair of formData.entries()){
       data[pair[0]]=pair[1]
     }
     try{
-      response=await fetch("/")
+      const response=await fetch("http://localhost:3000/api/login",{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json",
+
+        },
+        body:JSON.stringify({data:data})
+      })
+      if(!response.ok){
+        throw new Error(`HTTP error! Status: ${response.status}`)
+      }
+      const result=await response.json();
+      console.log(result)
     }
-    catch{
-      
+    catch(err){
+      console.log(err)
     }
   }
   return (
@@ -26,7 +39,7 @@ function Login() {
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                     <div className="bg-white p-6 rounded-lg shadow-lg w-96">
                     <h2 className="text-xl font-semibold">Login</h2>
-                    <form >
+                    <form onSubmit={handleSubmit} >
                             <ul className="space-y-4">
                                 <li>
                                     <label htmlFor="Username" className="block font-medium">Username</label>
