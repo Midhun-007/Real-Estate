@@ -1,78 +1,32 @@
-import  { useContext, useState } from 'react';
-import {  useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
-import AuthContext from './AuthContext';
+import React, { useState } from 'react'
 
-function Signup() {
-    const [isOpen, setIsOpen] = useState(true);
-    const {isSignedUp,setIsSignedUp}=useContext(AuthContext)
-    const [responsedata,setresponsedata]=useState(null)
-    const navigate=useNavigate();
-    
-    async function handleSubmit(event) {
-        event.preventDefault();
-        const formData = new FormData(event.target);
-        const data = {};
-
-        for (let pair of formData.entries()) {
-            data[pair[0]] = pair[1];
-        }
-
-
-        console.log('Form Data:', data);
-        
-        
-            try{
-              const response= await fetch("http://localhost:3000/api/data",{
-                method:"POST",
-                headers:{
-                  "Content-Type":"application/json",
-                },
-                body:JSON.stringify({data:data})
-              })
-      
-              if(!response.ok){
-                throw new Error(`HTTP error! Status: ${response.status}`)
-              }
-              const result=await response.json();
-              console.log(result)
-              setresponsedata(result)
-              if(result.message==="Data received successfully"){
-                  toast("Signup succes now login")
-                  
-                  setIsOpen(false);
-                  console.log("Before signup:", isSignedUp); 
-                    setIsSignedUp(true); 
-                    console.log("After signup:", isSignedUp);
-                
-                 navigate("/")
-                 
-                 
-              }
-              if(result.message==="Fill the data"){
-                  toast("Fill the Details")
-                  
-              }
-              
-      
-            }
-            catch(error){
-              console.log(error)
-            }
-            
-          
-          
-         // Close the popup after submission
+function Login() {
+  const [ispopup,setpopup]=useState(false)
+  
+  async function handleSubmit(event){
+    event.preventDefault();
+    const formData=new FormData()
+    const data={}
+    for(let pair of formData.entries){
+      data[pair[0]]=pair[1]
     }
-
-    return (
-       
-        <div className="flex items-center justify-center h-screen bg-gray-100">
-            {isOpen && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    try{
+      response=await fetch("/")
+    }
+    catch{
+      
+    }
+  }
+  return (
+    <>
+    <div style={{backgroundImage:"url('/header_img.png')"}}  className="bg-gray-200 w-full h-screen flex flex-col items-center justify-center min-h-screen mb-4
+     bg-cover bg-center gap-2 overflow-hidden">
+      <div className="flex items-center justify-center h-screen bg-gray-100">
+        {!ispopup&&
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                     <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-                        <h2 className="text-xl font-semibold">Signup</h2>
-                        <form onSubmit={handleSubmit}>
+                    <h2 className="text-xl font-semibold">Login</h2>
+                    <form >
                             <ul className="space-y-4">
                                 <li>
                                     <label htmlFor="Username" className="block font-medium">Username</label>
@@ -112,7 +66,7 @@ function Signup() {
                                 <button
                                     type="button"
                                     className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all"
-                                    onClick={() => setIsOpen(false)}
+                                    
                                 >
                                     Close
                                 </button>
@@ -124,12 +78,13 @@ function Signup() {
                                 </button>
                             </div>
                         </form>
-                    </div>
-                </div>
-            )}
-            <ToastContainer />
-        </div>
-                
-    );
+                      </div>
+                      </div>
+         }
+      </div>
+     </div>
+    </>
+  )
 }
-export default Signup;
+
+export default Login
