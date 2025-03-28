@@ -10,6 +10,8 @@ import Projects from './components/Projects'
 import Contact from './components/Contact'
 import Signup from './components/signup'
 import Login from "./components/login"
+import ProtectedRoute from './components/ProtectedRoute'
+import Dummy from './components/dummy'
 
 function App() {
 
@@ -20,9 +22,12 @@ const router=createBrowserRouter(
       <Route path="/About" element={<About></About>}></Route> 
       <Route path="/Projects" element={<Projects></Projects>}></Route>
       <Route path="/Testimonials" element={<Contact></Contact>}></Route>
-      <Route path='/profile' element={<Profile></Profile>}></Route>
+      
       <Route path='/Signup' element={<Signup></Signup>}/>
       <Route path="/login" element={<Login></Login>}/>
+      <Route element={<ProtectedRoute></ProtectedRoute>}>
+          <Route path='/profile' element={<Profile></Profile>}/>
+      </Route>
     </Route>
     
   )

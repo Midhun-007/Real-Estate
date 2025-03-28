@@ -9,6 +9,7 @@ function Navbar() {
   const mobilecss="md:hidden fixed w-full  right-0 top-0 botton-0 overflow-hidden bg-red transition-all"
   const [openclose,setOpenClose]=useState(0)
   const {isSignedUp}=useContext(AuthContext);
+  const {isLogin}=useContext(AuthContext)
   useEffect(()=>{
     if(openclose){
       document.body.style.overflow='hidden'//toprevent scrolling if mobilemenu is open
@@ -37,6 +38,7 @@ function Navbar() {
 
         {/* Desktop Navigation */}
         <ul className="hidden md:flex gap-6 text-gray-900 bg-white shadow-md px-8 py-3 rounded-full">
+        <NavLink to="/Profile" className="hover:text-gray-500 transition-all">Profile</NavLink>
           <NavLink to="/" className="hover:text-gray-500 transition-all">Home</NavLink>
           <NavLink to="/About" className="hover:text-gray-500 transition-all">About</NavLink>
           <NavLink to="/Projects" className="hover:text-gray-500 transition-all">Projects</NavLink>
@@ -45,12 +47,18 @@ function Navbar() {
 
         {/* Auth Buttons */}
         <div className="hidden md:flex gap-4">
-          <button 
+          {!isLogin&&<button 
             onClick={() => navigate('/login')} 
             className="px-6 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-all"
           >
             Login
-          </button>
+          </button>}
+          {isLogin&&<button 
+            onClick={() => navigate('/logout')} 
+            className="px-6 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-all"
+          >
+            Logout
+          </button>}
          {!isSignedUp&& <button 
             onClick={() => navigate('/signup')} 
             className="px-6 py-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition-all"

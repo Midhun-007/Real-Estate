@@ -5,7 +5,7 @@ import { request, response } from "express"
 
 passport.serializeUser((user,done)=>{
     console.log("inside serialzer")
-    done(null,user.id)
+    done(null,user._id)
 })
 
 passport.deserializeUser(async (id,done)=>{
@@ -13,7 +13,11 @@ passport.deserializeUser(async (id,done)=>{
     console.log(`deserializing user :${id}`)
     try{
         const user =await SignupData.findById(id)
-        if(!user) throw new Error("no user")
+        if(!user){
+            console.log("User not found in database");
+             throw new Error("no user")
+             
+        }
         done(null,user)
     }
     catch(err){

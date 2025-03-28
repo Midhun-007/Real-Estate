@@ -1,10 +1,30 @@
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 
 
 function Profile() {
-    
+  const [userCreadValue,setUserCread]=useState(["trial","trial","trial","trnsd"])
+  const userCread=["Username","Phone","Email","Address"]
+    useEffect(()=>{
+      async function profilePreData() {
+        const response= await fetch("http://localhost:3000/api/profile",{
+          method:"GET",
+          credentials: "include",
+        })
+        if(!response.ok){
+          throw new Error('Http error')
+
+        }
+        const result =await response.json()
+        console.log(`result${result.data}`)
+        setUserCread([result.data.Username,result.data.Phone,result.data.Email,result.data.Address])
+      }
+      profilePreData()
+    },[])
+
+
+
     const [popup,setPopup]=useState("my-20  hidden fixed left-20 w-3/4    inset-0  items-center justify-center")
     function Popup(){
       setPopup("my-20   fixed left-20 w-3/4    inset-0  items-center justify-center") 
@@ -12,7 +32,7 @@ function Profile() {
     function closePop(){
       setPopup("my-20  hidden fixed left-20 w-3/4    inset-0  items-center justify")
     }
-   const [image,setImage]=useState('')
+   /*const [image,setImage]=useState('')
     function handleSubmitChange(event){
       const reader=new FileReader()
       const file=event.target.files[0]
@@ -20,35 +40,48 @@ function Profile() {
         setImage(reader.result)
     }
     reader.readAsDataURL(file)
-    }
-    
-    const userCread=['Username','Phone','Email','Address']
-    const [userCreadValue,setUserCreadValue]=useState(['Midhun','9945XXXXX','mi@email.com','nit garnet b'])
+    }*/
 
-    function onSubmit(event){
+    
+    
+    
+
+    async function onSubmit(event){
       event.preventDefault()
       const formData=new FormData(event.target)
       const data={}
+      const dummy=[];
+      let i=0;
       for(let pair of formData.entries()){
         data[pair[0]]=pair[1]
+        dummy[i]=pair[1]
+        i=i+1
       }
-      setUserCreadValue([data.Username,data.Phone,data.Email,data.Address])
+      console.log(`dummy:${dummy}`)
+      setUserCread(dummy)
+     
       closePop()
+      try{
+        const response =await fetch("http://localhost:3000/api/profile",{
+          method:"POST",
+          headers:{
+            "Content-Type":"application/json",
+          },
+          body:JSON.stringify({data:data}),
+          credentials:"include"
+        })
+      }
+      catch(err){
+        console.log(err)
+      }
+
     }
 
   return (<>
   <div style={{backgroundImage:"url('/header_img.png')"}}  className="bg-gray-200 w-full h-screen flex flex-col items-center justify-center min-h-screen mb-4
      bg-cover bg-center gap-2 overflow-hidden">
       
-      <div id='profilepic' className='flex flex-col gap-4'>
-        <div className='rounded-full w-32 h-32 '>
-          <img src={image} alt=""  className='rounded-full w-32 h-32 mb-3'/>
-        </div>
-        <div>
-          <input type="file" onChange={handleSubmitChange} id='fileinput' className='hidden' />
-          <label htmlFor="fileinput" className='text-white  ml-4 bg-blue-700 p-2 rounded-md mt-3'>Profile Pic</label>
-        </div>
-      </div>
+      
   <div className="bg-white p-6 rounded-lg shadow-md w-[90%] md:w-[500px]">
         {userCread.map((item, index) => (
           <div key={index} className="flex flex-col mb-3">
@@ -59,12 +92,14 @@ function Profile() {
       </div>
 
       {/* Change Credentials Button */}
-      <button
-        onClick={Popup}
-        className="mt-6 bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition-all"
-      >
-        Change Credentials
-      </button>
+      
+      <button onClick={Popup} className="relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-blue-600 rounded-xl shadow-lg transition-all duration-300 ease-in-out hover:bg-blue-700 hover:shadow-xl hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+  Update Profile
+</button>
+
+
+
+      
 
       {/* Popup Modal */}
       <form onSubmit={onSubmit}>
