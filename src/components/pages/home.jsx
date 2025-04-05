@@ -3,7 +3,7 @@ import Navbar from '../Navbar'
 function Home() {
 
   return (
-    <div className='w-full overflow-hidden'>
+    <div className=' overflow-auto scrollbar-hide'>
         
         <Navbar></Navbar>
         

@@ -6,7 +6,7 @@ import AuthContext from './AuthContext'
 function Navbar() {
   const defmobilecss="md:hidden w-0 h-0 right-0 top-0 botton-0 overflow-hidden bg-red transition-all"
   const [showMobileMenu,setShowMobileMenu]=useState(defmobilecss)
-  const mobilecss="md:hidden fixed w-full  right-0 top-0 botton-0 overflow-hidden bg-red transition-all"
+  
   const [openclose,setOpenClose]=useState(0)
   const {isSignedUp}=useContext(AuthContext);
   const {isLogin}=useContext(AuthContext)
@@ -25,7 +25,7 @@ function Navbar() {
   return (
     <>
     {/* Navbar Container */}
-    <div className="absolute top-0 left-0 w-full z-50 ">
+    <div className="absolute top-0 left-0 w-full z-50 scrollbar-hide ">
       <div className="container mx-auto flex justify-between items-center py-4 px-6 md:px-20 lg:px-32">
         
         {/* Logo */}
@@ -43,6 +43,7 @@ function Navbar() {
           <NavLink to="/About" className="hover:text-gray-500 transition-all">About</NavLink>
           <NavLink to="/Projects" className="hover:text-gray-500 transition-all">Projects</NavLink>
           <NavLink to="/Testimonials" className="hover:text-gray-500 transition-all">Testimonials</NavLink>
+          <NavLink to="/Cart" className="hover:text-gray-500 transition-all">Cart</NavLink>
         </ul>
 
         {/* Auth Buttons */}

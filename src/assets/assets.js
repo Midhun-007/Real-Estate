@@ -34,42 +34,142 @@ export const assets = {
 }
 
 export const projectsData = [
+  [
     {
-      title: "Skyline Haven",
-      price: "$2,50,000",
-      location: "California",
-      image: project_img_1
+      "project_name": "Lodha Bellissimo",
+      "city": "Mumbai",
+      "location": "Mahalaxmi",
+      "price": "₹12,00,00,000",
+      "image": "/images/lodha_bellissimo.jpg"
     },
     {
-      title: "Vista Verde",
-      price: "$2,50,000",
-      location: "San Francisco",
-      image: project_img_2
+      "project_name": "DLF Camellias",
+      "city": "Gurgaon",
+      "location": "Golf Course Road",
+      "price": "₹25,00,00,000",
+      "image": "/images/dlf_camellias.jpg"
     },
     {
-      title: "Serenity Suites",
-      price: "$2,50,000",
-      location: "Chicago",
-      image: project_img_3
+      "project_name": "Prestige Shantiniketan",
+      "city": "Bangalore",
+      "location": "Whitefield",
+      "price": "₹3,00,00,000",
+      "image": "/images/prestige_shantiniketan.jpg"
     },
     {
-      title: "Central Square",
-      price: "$2,50,000",
-      location: "Los Angeles",
-      image: project_img_4
+      "project_name": "Sobha City",
+      "city": "Chennai",
+      "location": "OMR",
+      "price": "₹1,50,00,000",
+      "image": "/images/sobha_city.jpg"
     },
     {
-      title: "Vista Verde",
-      price: "$2,50,000",
-      location: "San Francisco",
-      image: project_img_5
+      "project_name": "Godrej Infinity",
+      "city": "Pune",
+      "location": "Keshav Nagar",
+      "price": "₹2,00,00,000",
+      "image": "/images/godrej_infinity.jpg"
     },
     {
-      title: "Serenity Suites",
-      price: "$2,50,000",
-      location: "Chicago",
-      image: project_img_6
+      "project_name": "Hiranandani Estate",
+      "city": "Thane",
+      "location": "Ghodbunder Road",
+      "price": "₹1,80,00,000",
+      "image": "/images/hiranandani_estate.jpg"
     },
+    {
+      "project_name": "Urbana",
+      "city": "Kolkata",
+      "location": "EM Bypass",
+      "price": "₹2,20,00,000",
+      "image": "/images/urbana.jpg"
+    },
+    {
+      "project_name": "L&T Raintree Boulevard",
+      "city": "Hyderabad",
+      "location": "Gachibowli",
+      "price": "₹2,50,00,000",
+      "image": "/images/raintree_boulevard.jpg"
+    },
+    {
+      "project_name": "The Palm Springs",
+      "city": "Gurgaon",
+      "location": "Golf Course Road",
+      "price": "₹4,00,00,000",
+      "image": "/images/palm_springs.jpg"
+    },
+    {
+      "project_name": "Runwal Bliss",
+      "city": "Mumbai",
+      "location": "Kanjurmarg",
+      "price": "₹1,20,00,000",
+      "image": "/images/runwal_bliss.jpg"
+    },
+    {
+      "project_name": "Embassy Springs",
+      "city": "Bangalore",
+      "location": "North Bangalore",
+      "price": "₹5,50,00,000",
+      "image": "/images/embassy_springs.jpg"
+    },
+    {
+      "project_name": "Brigade Exotica",
+      "city": "Bangalore",
+      "location": "Old Madras Road",
+      "price": "₹3,20,00,000",
+      "image": "/images/brigade_exotica.jpg"
+    },
+    {
+      "project_name": "Ozone Urbana",
+      "city": "Bangalore",
+      "location": "Devanahalli",
+      "price": "₹90,00,000",
+      "image": "/images/ozone_urbana.jpg"
+    },
+    {
+      "project_name": "Pride Purple Park Ivory",
+      "city": "Pune",
+      "location": "Wakad",
+      "price": "₹95,00,000",
+      "image": "/images/pride_purple.jpg"
+    },
+    {
+      "project_name": "Raheja Vistas",
+      "city": "Pune",
+      "location": "NIBM",
+      "price": "₹1,20,00,000",
+      "image": "/images/raheja_vistas.jpg"
+    },
+    {
+      "project_name": "Runwal Forests",
+      "city": "Mumbai",
+      "location": "Kanjurmarg",
+      "price": "₹1,60,00,000",
+      "image": "/images/runwal_forests.jpg"
+    },
+    {
+      "project_name": "Mantri Espana",
+      "city": "Bangalore",
+      "location": "Bellandur",
+      "price": "₹4,80,00,000",
+      "image": "/images/mantri_espana.jpg"
+    },
+    {
+      "project_name": "Oberoi Esquire",
+      "city": "Mumbai",
+      "location": "Goregaon East",
+      "price": "₹10,00,00,000",
+      "image": "/images/oberoi_esquire.jpg"
+    },
+    {
+      "project_name": "Tata Eureka Park",
+      "city": "Noida",
+      "location": "Sector 150",
+      "price": "₹1,05,00,000",
+      "image": "/images/tata_eureka_park.jpg"
+    }
+  ]
+  
     
   ];
 

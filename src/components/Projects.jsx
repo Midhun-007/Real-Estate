@@ -4,6 +4,7 @@ function Projects() {
 
     const [currentIndex,setCurrentIndex]=useState(0)
     const [cardsToShow,setCardsToShow]=useState(4)
+    const [hovered,setHovered]=useState([0,0,0,0,0,0])
     useEffect(()=>{
         const upateCards=()=>{
             if(window.innerWidth>=1024){

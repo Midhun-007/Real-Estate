@@ -8,6 +8,7 @@ import SignupData from "./mongoose/schemas/user.mjs"
 import "./strategies/local-strategies.mjs";
 import ProfileData from "./mongoose/schemas/profile.mjs"
 import { data } from "react-router-dom"
+import CartData from "./mongoose/schemas/cart.mjs"
 const app=express();
 
 mongoose.connect('mongodb://localhost:27017/server').then(console.log("connected to database")).catch((err)=>{console.log(err)})
@@ -134,6 +135,23 @@ app.post("/api/profile",(request,response)=>{
 
 
 })
+const Authentication=(request,response,next)=>{
+    if(request.isAuthenticated()){
+        next()
+    }
+}
+app.post("/api/cart",Authentication,async (request,response)=>{
+    console.log(request.body)
+    const find=await CartData.findOne({title:request.body.data.title})
+    const {title,price,location}=request.body.data
+    if(!find){
+        const id=request.user._id
+        const cartitem=await CartData.create({id,title,price,location})
+    }
+    
+    }
+)
+   
 app.listen(PORT,()=>{
     console.log("server has started "+PORT)
 })

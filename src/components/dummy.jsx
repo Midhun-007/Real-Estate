@@ -1,55 +1,136 @@
-import React from 'react'
+import React, { useRef, useEffect } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import {
+  Navigation,
+  Pagination,
+  Autoplay,
+  EffectCoverflow,
+  Thumbs,
+  FreeMode
+} from "swiper/modules";
+import gsap from "gsap";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/effect-coverflow";
+import "swiper/css/thumbs";
+import "swiper/css/free-mode";
 
-function Dummy () {
+const projectsData = [
+  {
+    project_name: "Lodha Bellissimo",
+    location: "Mahalaxmi, Mumbai",
+    price: "₹12,00,00,000",
+    image: "https://source.unsplash.com/800x500/?luxury,apartment"
+  },
+  {
+    project_name: "DLF Camellias",
+    location: "Golf Course Road, Gurgaon",
+    price: "₹25,00,00,000",
+    image: "https://source.unsplash.com/800x500/?villa,mansion"
+  },
+  {
+    project_name: "Prestige Lakeside Habitat",
+    location: "Varthur, Bangalore",
+    price: "₹2,50,00,000",
+    image: "source.unsplash.com/800x500/?lakeview,house"
+  },
+  {
+    project_name: "Sobha City",
+    location: "OMR, Chennai",
+    price: "₹1,50,00,000",
+    image: "https://source.unsplash.com/800x500/?realestate,home"
+  },
+  {
+    project_name: "Hiranandani Estate",
+    location: "Ghodbunder Road, Thane",
+    price: "₹1,80,00,000",
+    image: "https://source.unsplash.com/800x500/?skyscraper,balcony"
+  }
+];
+
+function ProjectCarousel() {
+  const thumbsSwiperRef = useRef(null);
+  const textRef = useRef(null);
+
+  useEffect(() => {
+    gsap.from(textRef.current, {
+      opacity: 0,
+      y: -20,
+      duration: 1,
+      ease: "power2.out"
+    });
+  }, []);
+
   return (
-    <div><div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
-    <div className="relative py-3 sm:max-w-xl sm:mx-auto">
-      <div
-        className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-sky-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl">
-      </div>
-      <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
-  
-        <div className="max-w-md mx-auto">
-          <div>
-            <h1 className="text-2xl font-semibold">Login</h1>
-          </div>
-          <div className="divide-y divide-gray-200">
-            <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-              <div className="relative">
-                <input  id="Username" name="Username" type="text" className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="Username address" />
-                <label htmlFor="Username" className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Username Address</label>
-              </div>
-              <div className="relative">
-                <input  id="pass" name="Password" type="password" className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="Password" />
-                <label htmlFor="pass" className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Password</label>
-              </div>
-              <div className="relative">
-              <div className="flex justify-between mt-4">
-              <button
-                                    type="button"
-                                    className="px-4 py-2 bg-cyan-500 text-white rounded-lg hover:bg-red-600 transition-all"
-                                    onClick={()=>setpopup(false)}
-                                >
-                                    Close
-                                </button>
-                                <button
-                                    type="submit"
-                                    className="px-4 py-2 bg-cyan-500 text-white rounded-lg hover:bg-green-600 transition-all"
-                                >
-                                    Submit
-                                </button>
-              </div>
+    <div className="max-w-5xl mx-auto p-6 mt-28 overflow-auto">
+      {/* Title with GSAP Animation */}
+      
+
+      {/* Main Swiper Carousel */}
+      <Swiper
+        modules={[Navigation, Pagination, Autoplay, EffectCoverflow, Thumbs, FreeMode]}
+        effect="coverflow"
+        spaceBetween={30}
+        slidesPerView={1}
+        navigation
+        pagination={{ clickable: true, dynamicBullets: true }}
+        autoplay={{ delay: 4000, disableOnInteraction: false }}
+        loop={true}
+        centeredSlides={true}
+        grabCursor={true}
+        coverflowEffect={{
+          rotate: 50,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows: true
+        }}
+        thumbs={{ swiper: thumbsSwiperRef.current }}
+        className="rounded-lg shadow-xl"
+      >
+        {projectsData.map((property, index) => (
+          <SwiperSlide key={index} className="relative group">
+            <img
+              src="src\assets\images.jpeg"
               
+              className="w-full h-[500px] object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
+            />
+            <div className="absolute bottom-4 left-4 bg-black bg-opacity-50 text-white p-4 rounded-lg">
+              <h3 className="text-2xl font-bold">{property.project_name}</h3>
+              <h4 className="text-lg">{property.location}</h4>
+              <h5 className="text-xl font-semibold text-green-300">{property.price}</h5>
             </div>
-          </div>
-        </div>
-  
-        
-  
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+      {/* Progress Bar */}
+      <div className="mt-4 h-2 bg-gray-300 rounded-lg relative">
+        <div className="absolute top-0 left-0 h-2 bg-indigo-600 animate-progress rounded-lg"></div>
       </div>
+
+      {/* Thumbnail Swiper */}
+      <Swiper
+        onSwiper={(swiper) => (thumbsSwiperRef.current = swiper)}
+        spaceBetween={10}
+        slidesPerView={4}
+        freeMode={true}
+        watchSlidesProgress
+        className="mt-4"
+      >
+        {projectsData.map((property, index) => (
+          <SwiperSlide key={index} className="cursor-pointer">
+            <img
+              src="src\assets\images.jpeg"
+              alt={property.project_name}
+              className="w-full h-20 object-cover rounded-md opacity-75 hover:opacity-100 transition-opacity duration-300"
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
-  </div></div></div>
-  )
+  );
 }
 
-export default Dummy;
+export default ProjectCarousel;
